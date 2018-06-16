@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.0"
+	xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/persistence         http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd">
+	
+	<!-- Unidade de persistencia -->
+	<persistence-unit name="myPU">
+
+		<!-- Implementação do JPA -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<!-- Lista de entidades Funcionou sem isso... --> 
+		<!-- <class>br.com.novaroma.model.bean.Fabricante</class>-->		
+		<!-- <class>br.com.novaroma.model.bean.Impressora</class> -->		
+		
+		<properties>
+			<!-- Propriedades JDBC -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/loja" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="98985598" />
+		
+			<!-- Configurações específicas do Hibernate -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+	
+		<!-- Unidade de persistencia 2 PRECISA SER AJUSTADO  --> 
+	<persistence-unit name="myPU2">
+
+		<!-- Implementação do JPA -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		
+		<properties>
+			<!-- Propriedades JDBC -->
+			<property name="javax.persistence.jdbc.driver" value="com.mysql.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost/loja" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="98985598" />
+		
+			<!-- Configurações específicas do Hibernate -->
+			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL5InnoDBDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+		</properties>
+	</persistence-unit>
+	
+</persistence>
