@@ -4,17 +4,16 @@ import java.time.LocalDateTime;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 
 @Entity 
-@Table(name = "bicycles")
-public class Bicycle {
+@Table(name = "bicycle_status", uniqueConstraints = { @UniqueConstraint( columnNames = "bicycle_status", name = "uk_bicycle_status" ) })
+public class BicycleStatus {
+
     @Column(name = "date_time_creation", nullable = false)
     private LocalDateTime dateTimeCreation;
     
@@ -28,37 +27,22 @@ public class Bicycle {
     private Integer dateTimeUpdateUserId;
 
     @Id
-    @Column(name = "bicycle_id", nullable = false)
+    @Column(name = "bicycle_status_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer bicycleId; //Primary Key
+    private Integer bicycleStatusId; 
     
-    @ManyToOne
-    @JoinColumn(name = "bicycle_status_id", foreignKey=@ForeignKey(name="fk_bicycle_status_id_bicycles"))
-    private BicycleStatus bicycleStatus;
-    	
-	@Column(name = "brand", length = 40, nullable = false)
-    private String brand;
+    @Column(name = "bicycle_status", length = 3, nullable = false)
+    private String bicycleStatus;
     
-    @Column(name = "model", length = 30, nullable = false)
-    private String model;
-    
-    @Column(name = "color", length = 30, nullable = false)
-    private String color;
+    @Column(name = "description", length = 30, nullable = false)
+    private String description;
 
-    public Bicycle() {}
-    public Bicycle(BicycleStatus bicycleStatus, String brand, String model, String color) {
+    public BicycleStatus() {}
+    public BicycleStatus(String bicycleStatus, String description) {
         this.bicycleStatus = bicycleStatus;
-    	this.brand = brand;
-        this.model = model;
-        this.color = color;
+        this.description = description;
     }
 
-    public String getColor() {
-		return color;
-	}
-    public void setColor(String color) {
-		this.color = color;
-	}
     public LocalDateTime getDateTimeCreation() {
 		return dateTimeCreation;
 	}
@@ -83,29 +67,24 @@ public class Bicycle {
 	public void setDateTimeUpdateUserId(Integer dateTimeUpdateUserId) {
 		this.dateTimeUpdateUserId = dateTimeUpdateUserId;
 	}
-    public Integer getBicycleId() {
-		return bicycleId;
+    public String getDescription() {
+		return description;
 	}
-	public void setBicycleId(Integer bicycleId) {
-		this.bicycleId = bicycleId;
+    public void setDescription(String description) {
+		this.description = description;
+    }
+	public Integer getBicycleStatusId() {
+		return bicycleStatusId;
 	}
-	public String getBrand() {
-		return brand;
+	public void setBicycleStatusId(Integer bicycleStatusId) {
+		this.bicycleStatusId = bicycleStatusId;
 	}
-	public void setBrand(String brand) {
-		this.brand = brand;
-	}
-	public String getModel() {
-		return model;
-	}
-	public void setModel(String model) {
-		this.model = model;
-	}
-	public BicycleStatus getBicycleStatus() {
+	public String getBicycleStatus() {
 		return bicycleStatus;
 	}
-	public void setBicycleStatus(BicycleStatus bicycleStatus) {
+	public void setBicycleStatus(String bicycleStatus) {
 		this.bicycleStatus = bicycleStatus;
 	}
-	
+
 }
+
