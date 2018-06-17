@@ -2,6 +2,7 @@ package com.fnr.model;
 
 import java.time.LocalDateTime;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.ForeignKey;
@@ -32,7 +33,7 @@ public class Bicycle {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer bicycleId; //Primary Key
     
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "bicycle_status_id", foreignKey=@ForeignKey(name="fk_bicycle_status_id_bicycles"))
     private BicycleStatus bicycleStatus;
     	

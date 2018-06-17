@@ -11,43 +11,34 @@ import com.fnr.interfaces.IDAO;
 public class DAO<T> implements IDAO<T> {
 
 	@Override
-	public boolean post(T object) {
+	public boolean post(T entity) {
 		EntityManager em = new ConnectionFactory().getConnection();
 		try {
 			em.getTransaction().begin();
-			em.persist(object);
+			em.persist(entity);
 			em.getTransaction().commit();
+			return true;
 		}catch(PersistenceException e) {
 			em.getTransaction().rollback();
 			e.printStackTrace();
+			return false;
 		}finally {
 			em.close();
 		}
-		return false;
 	}
 
+	@SuppressWarnings("unchecked")
 	@Override
-	public boolean put(Object object, Integer id) { // update method
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public boolean delete(Integer id) { 
-		// TODO Auto-generated method stub
-		return false;
-	}
-
-	@Override
-	public T getById() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	public List<T> getAll() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<T> getAll(T entity) {
+		EntityManager em = new ConnectionFactory().getConnection();
+		try {
+			return em.createQuery("from "+ entity.getClass().getSimpleName()).getResultList();
+		}catch(PersistenceException e) {
+			System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+			return null;
+		}finally {
+			em.close();
+		}
 	}
 
 }
