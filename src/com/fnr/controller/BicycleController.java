@@ -43,8 +43,8 @@ public class BicycleController implements IController<Bicycle>{
 	}
 
 	@Override
-	public Response delete(ConnectionFactory conn, Integer id) {
-		if (id != null && this.dao.delete(conn, id)) 
+	public Response delete(ConnectionFactory conn, Bicycle bicycle, Integer bicycleId) {
+		if (bicycleId != null && this.dao.delete(conn, bicycle, bicycleId)) 
 			return Response.DELETE_SUCCESS;
 
 		return Response.DELETE_FAILED;

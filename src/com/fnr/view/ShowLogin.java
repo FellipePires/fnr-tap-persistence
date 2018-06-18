@@ -18,7 +18,7 @@ public class ShowLogin {
 				String email = JOptionPane.showInputDialog(null, "Email:");
 				String password = JOptionPane.showInputDialog(null, "Senha:");
 
-				LoginInfo login = new LoginInfo(email, password);
+				LoginInfo login = new LoginInfo(email, Utils.encryptPassword(password));
 
 				user = Utils.authUser(login);
 

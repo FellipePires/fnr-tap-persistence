@@ -26,6 +26,7 @@ public class DAO<T> implements IDAO<T> {
 		} finally {
 			em.close();
 		}
+		
 	}
 
 	@SuppressWarnings("unchecked")
@@ -40,6 +41,7 @@ public class DAO<T> implements IDAO<T> {
 		} finally {
 			em.close();
 		}
+		
 	}
 
 	public boolean put(ConnectionFactory conn, T entity) {
@@ -60,12 +62,11 @@ public class DAO<T> implements IDAO<T> {
 	}
 
 	@Override
-	public boolean delete(ConnectionFactory conn, Integer id) {
+	public boolean delete(ConnectionFactory conn, T entity, Integer id) {
 		EntityManager em = conn.getConnection();
 		try {
 			em.getTransaction().begin();
-			Bicycle bike = em.find(Bicycle.class, id);
-			em.remove(bike);
+			em.remove(em.find(entity.getClass(), id));
 			em.getTransaction().commit();
 			return true;
 		} catch (PersistenceException e) {

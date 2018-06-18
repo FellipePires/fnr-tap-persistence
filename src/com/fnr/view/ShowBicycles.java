@@ -63,7 +63,9 @@ public class ShowBicycles {
 	private static String remove(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			int bicycleId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da Bicicleta"));
-			return bicycleController.delete(conn, bicycleId).getMessage();
+			Bicycle bicycle = bicycleController.getById(conn, bicycleId);
+			
+			return bicycleController.delete(conn, bicycle, bicycleId).getMessage();
 			
 		}else {
 			return "Empregado não pode realizar alterações no banco";

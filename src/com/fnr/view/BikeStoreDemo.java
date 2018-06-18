@@ -8,7 +8,6 @@ public class BikeStoreDemo {
 
 	public static void main(String[] args) {
 
-		
 		try {
 				
 			ConnectionFactory conn = ShowLogin.showLoginView();
@@ -26,66 +25,35 @@ public class BikeStoreDemo {
 							+ "\n\n0 - Logout"));
 					
 					switch(menuOption) {
-					case 1:
-						ShowBicycles.showBicyclesView(conn);
-						break;
-						
-					case 2:
-						break;
-						
-					case 3:
-						break;
-						
-					case 4:
-						break;
-						
-					case 0:
-						ShowLogin.showLoginView();
-						break;
-						
-//					default: 
+						case 1:
+							ShowBicycles.showBicyclesView(conn);
+							break;
+							
+						case 2:
+	//						ShowBicycles.showBicyclesView(conn);
+							break;
+							
+						case 3:
+	//						ShowBicycles.showBicyclesView(conn);
+							break;
+							
+						case 4:
+							ShowUsers.showUsersView(conn);
+							break;
+							
+						case 0:
+							conn.getEMFactory().close();
+							ShowLogin.showLoginView();
+							break;
+							
+						default: JOptionPane.showMessageDialog(null, "Informe um valor válido!");
 					}
-					
-					
 					
 				}while(menuOption != 0);
 			}else {
 				System.out.println("User inválido");
 			}
 			
-			
-			
-			
-			
-			
-//			BicycleStatus bikeStatusPronta = new BicycleStatus("BD", "Bike despachada");
-//			bikeStatusPronta.setDateTimeCreation(LocalDateTime.now());
-//			bikeStatusPronta.setDateTimeCreationUserId(1);
-//
-//			IController<BicycleStatus> bikeStatusController = new BicycleStatusController();
-//			IController<Bicycle> bikeController = new BicycleController();
-//
-//			bikeStatusController.post(bikeStatusPronta);// Inserir Bike Status (OK)
-//			
-//			List<BicycleStatus> b1 = bikeStatusController.getAll(new BicycleStatus()); // Listar todos os dados da tabela (OK)
-//			for (BicycleStatus b : b1) {
-//				System.out.println(b.getDescription());
-//			}
-
-			// Início função atualizar (OK)
-//			 BicycleStatus bikeStatus = bikeStatusController.getById(4);
-//			
-//			 Bicycle bike = bikeController.getById(3);
-//			 bike.setBicycleStatus(bikeStatus);
-//			 bike.setBrand("Cannondale");
-//			 bike.setColor("Vermelho");
-//			 bike.setModel("F21");
-//			
-//			 System.out.println(bikeController.put(bike, 3));
-
-			// Início função remover (OK)
-			// System.out.println(bikeController.delete(3));
-//
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
