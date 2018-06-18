@@ -2,13 +2,13 @@ package com.fnr.enums;
 
 public enum Response {
 	POST_SUCCESS(true, "Cadastro realizado com sucesso!"),
-	POST_FAILED(false, "Cadastro n√£o realizado"),
+	POST_FAILED(false, "Cadastro n„o realizado"),
 	
-	UPDATE_SUCCESS(true, "Altera√ß√£o realizada com sucesso!"),
-	UPDATE_FAILED(false, "Altera√ß√£o n√£o realizada"),
+	UPDATE_SUCCESS(true, "AlteraÁ„o realizada com sucesso!"),
+	UPDATE_FAILED(false, "AlteraÁ„o n„o realizada"),
 	
-	DELETE_SUCCESS(true, "Remo√ß√£o realizada com sucesso!"),
-	DELETE_FAILED(false, "Remo√ß√£o n√£o realizada");
+	DELETE_SUCCESS(true, "RemoÁ„o realizada com sucesso!"),
+	DELETE_FAILED(false, "RemoÁ„o n„o realizada");
 	
 	private String message;
 	private boolean status;

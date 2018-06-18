@@ -10,31 +10,31 @@ import com.fnr.dao.DAO;
 import com.fnr.enums.Response;
 import com.fnr.interfaces.IController;
 import com.fnr.interfaces.IDAO;
-import com.fnr.model.BicycleStatus;
+import com.fnr.model.Attend;
 
-public class BicycleStatusController implements IController<BicycleStatus>{
-	private IDAO<BicycleStatus> dao;
+public class AttendController implements IController<Attend>{
+	private IDAO<Attend> dao;
 
-	public BicycleStatusController() {
-		this.dao = new DAO<BicycleStatus>();
+	public AttendController() {
+		this.dao = new DAO<Attend>();
 	}
 
-	private boolean verifyData(BicycleStatus bikeStatus) {
-		if (bikeStatus.getBicycleStatus() != null && bikeStatus.getDescription() != null)
+	private boolean verifyData(Attend att) {
+		if (att.getBicycle() != null && att.getBicycleStatus() != null && att.getCustomer() != null && att.getValue() != null)
 			return true;
 		return false;
 	}
 
 	@Override
-	public Response post(ConnectionFactory conn, BicycleStatus bikeStatus) {
-		if (verifyData(bikeStatus) && this.dao.post(conn, bikeStatus))
+	public Response post(ConnectionFactory conn, Attend att) {
+		if (verifyData(att) && this.dao.post(conn, att))
 			return Response.POST_SUCCESS;
 		return Response.POST_FAILED;
 	}
 
 	@Override
-	public Response put(ConnectionFactory conn, BicycleStatus bikeStatus) {
-		if (verifyData(bikeStatus) && this.dao.put(conn, bikeStatus)) 
+	public Response put(ConnectionFactory conn, Attend att) {
+		if (verifyData(att) && this.dao.put(conn, att)) 
 			return Response.UPDATE_SUCCESS;
 		return Response.UPDATE_FAILED;
 	}
@@ -47,11 +47,11 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 	}
 
 	@Override
-	public BicycleStatus getById(ConnectionFactory conn, Integer id) {
+	public Attend getById(ConnectionFactory conn, Integer id) {
 		if (id != null) {
 			EntityManager em = conn.getConnection();
 			try {
-				return em.find(BicycleStatus.class, id);
+				return em.find(Attend.class, id);
 			} catch (PersistenceException e) {
 				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
 				return null;
@@ -63,7 +63,7 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 	}
 
 	@Override
-	public List<BicycleStatus> getAll(ConnectionFactory conn, BicycleStatus bicycleStatusInstance) {
-		return this.dao.getAll(conn, bicycleStatusInstance);
+	public List<Attend> getAll(ConnectionFactory conn, Attend attInstance) {
+		return this.dao.getAll(conn, attInstance);
 	}
 }

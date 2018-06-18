@@ -48,17 +48,17 @@ public class Attend {
     private double value;
 
     public Attend() {}
-    public Attend(Bicycle bicycle, BicycleStatus bicycleStatus, Customer customer, double value) {
+    public Attend(Bicycle bicycle, BicycleStatus bicycleStatus, Customer customer, Double value) {
     	this.bicycle = bicycle;
         this.bicycleStatus = bicycleStatus;
         this.customer = customer;
         this.value = value;
     }
 
-    public double getValue() {
+    public Double getValue() {
 		return value;
 	}
-    public void setValue(double value) {
+    public void setValue(Double value) {
 		this.value = value;
 	}
     public LocalDateTime getDateTimeCreation() {

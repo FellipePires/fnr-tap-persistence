@@ -10,31 +10,31 @@ import com.fnr.dao.DAO;
 import com.fnr.enums.Response;
 import com.fnr.interfaces.IController;
 import com.fnr.interfaces.IDAO;
-import com.fnr.model.BicycleStatus;
+import com.fnr.model.Customer;
 
-public class BicycleStatusController implements IController<BicycleStatus>{
-	private IDAO<BicycleStatus> dao;
+public class CustomerController implements IController<Customer>{
+	private IDAO<Customer> dao;
 
-	public BicycleStatusController() {
-		this.dao = new DAO<BicycleStatus>();
+	public CustomerController() {
+		this.dao = new DAO<Customer>();
 	}
 
-	private boolean verifyData(BicycleStatus bikeStatus) {
-		if (bikeStatus.getBicycleStatus() != null && bikeStatus.getDescription() != null)
+	private boolean verifyData(Customer cust) {
+		if (cust.getName() != null && cust.getEmail() != null && cust.getPhone() != null && cust.getResidencial_Phone() != null)
 			return true;
 		return false;
 	}
 
 	@Override
-	public Response post(ConnectionFactory conn, BicycleStatus bikeStatus) {
-		if (verifyData(bikeStatus) && this.dao.post(conn, bikeStatus))
+	public Response post(ConnectionFactory conn, Customer cust) {
+		if (verifyData(cust) && this.dao.post(conn, cust))
 			return Response.POST_SUCCESS;
 		return Response.POST_FAILED;
 	}
 
 	@Override
-	public Response put(ConnectionFactory conn, BicycleStatus bikeStatus) {
-		if (verifyData(bikeStatus) && this.dao.put(conn, bikeStatus)) 
+	public Response put(ConnectionFactory conn, Customer cust) {
+		if (verifyData(cust) && this.dao.put(conn, cust)) 
 			return Response.UPDATE_SUCCESS;
 		return Response.UPDATE_FAILED;
 	}
@@ -47,11 +47,11 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 	}
 
 	@Override
-	public BicycleStatus getById(ConnectionFactory conn, Integer id) {
+	public Customer getById(ConnectionFactory conn, Integer id) {
 		if (id != null) {
 			EntityManager em = conn.getConnection();
 			try {
-				return em.find(BicycleStatus.class, id);
+				return em.find(Customer.class, id);
 			} catch (PersistenceException e) {
 				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
 				return null;
@@ -63,7 +63,7 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 	}
 
 	@Override
-	public List<BicycleStatus> getAll(ConnectionFactory conn, BicycleStatus bicycleStatusInstance) {
-		return this.dao.getAll(conn, bicycleStatusInstance);
+	public List<Customer> getAll(ConnectionFactory conn, Customer custInstance) {
+		return this.dao.getAll(conn, custInstance);
 	}
 }

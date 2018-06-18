@@ -53,12 +53,11 @@ public class DAO<T> implements IDAO<T> {
 			return true;
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			System.out.println("Desfazendo transaÃ§Ãµes... \nMotivo: " + e.getMessage());
+			System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
 			return false;
 		} finally {
 			em.close();
-		}
-		
+		}	
 	}
 
 	@Override
@@ -71,12 +70,10 @@ public class DAO<T> implements IDAO<T> {
 			return true;
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			System.out.println("Desfazendo transaÃ§Ãµes... \nMotivo: " + e.getMessage());
+			System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
 			return false;
 		} finally {
 			em.close();
 		}
-
 	}
-
 }

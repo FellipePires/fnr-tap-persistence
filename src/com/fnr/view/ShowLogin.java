@@ -11,7 +11,7 @@ public class ShowLogin {
 	
 	public static ConnectionFactory showLoginView() {
 		try {
-			// LOGIN DO USUÁRIO
+			// LOGIN DO USUÃ�RIO
 			User user = null;
 			
 			do {
@@ -25,15 +25,11 @@ public class ShowLogin {
 				if (user == null) {
 					JOptionPane.showMessageDialog(null, "Usuário não encontrado... Tente novamente");
 				} 
-			} while (user == null);
-			
+			} while (user == null);		
 			return new ConnectionFactory(user);
-			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
 		return null;
-		
 	}
 }

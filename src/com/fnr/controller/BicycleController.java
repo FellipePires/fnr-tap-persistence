@@ -22,7 +22,6 @@ public class BicycleController implements IController<Bicycle>{
 	private boolean verifyData(Bicycle bike) {
 		if (bike.getBicycleStatus() != null && bike.getBrand() != null && bike.getColor() != null && bike.getModel() != null)
 			return true;
-
 		return false;
 	}
 
@@ -30,7 +29,6 @@ public class BicycleController implements IController<Bicycle>{
 	public Response post(ConnectionFactory conn, Bicycle bike) {
 		if (verifyData(bike) && this.dao.post(conn, bike))
 			return Response.POST_SUCCESS;
-
 		return Response.POST_FAILED;
 	}
 
@@ -38,7 +36,6 @@ public class BicycleController implements IController<Bicycle>{
 	public Response put(ConnectionFactory conn, Bicycle bike) {
 		if (verifyData(bike) && this.dao.put(conn, bike)) 
 			return Response.UPDATE_SUCCESS;
-			
 		return Response.UPDATE_FAILED;
 	}
 
@@ -46,7 +43,6 @@ public class BicycleController implements IController<Bicycle>{
 	public Response delete(ConnectionFactory conn, Bicycle bicycle, Integer bicycleId) {
 		if (bicycleId != null && this.dao.delete(conn, bicycle, bicycleId)) 
 			return Response.DELETE_SUCCESS;
-
 		return Response.DELETE_FAILED;
 	}
 
@@ -57,13 +53,12 @@ public class BicycleController implements IController<Bicycle>{
 			try {
 				return em.find(Bicycle.class, id);
 			} catch (PersistenceException e) {
-				System.out.println("Desfazendo transaÃ§Ãµes... \nMotivo: " + e.getMessage());
+				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
 				return null;
 			} finally {
 				em.close();
 			}
 		}
-
 		return null;
 	}
 
@@ -71,5 +66,4 @@ public class BicycleController implements IController<Bicycle>{
 	public List<Bicycle> getAll(ConnectionFactory conn, Bicycle bicycleInstance) {
 		return this.dao.getAll(conn, bicycleInstance);
 	}
-
 }
