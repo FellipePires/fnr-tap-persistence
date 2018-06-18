@@ -40,8 +40,8 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 	}
 
 	@Override
-	public Response delete(ConnectionFactory conn, Integer id) {
-		if (id != null && this.dao.delete(conn, id)) 
+	public Response delete(ConnectionFactory conn, BicycleStatus bicycleStatus, Integer bicycleStatusId) {
+		if (bicycleStatusId != null && this.dao.delete(conn, bicycleStatus, bicycleStatusId)) 
 			return Response.DELETE_SUCCESS;
 		return Response.DELETE_FAILED;
 	}
@@ -53,7 +53,7 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 			try {
 				return em.find(BicycleStatus.class, id);
 			} catch (PersistenceException e) {
-				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+				System.out.println("Desfazendo transaï¿½ï¿½es... \nMotivo: " + e.getMessage());
 				return null;
 			} finally {
 				em.close();

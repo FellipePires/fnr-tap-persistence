@@ -7,7 +7,6 @@ import javax.persistence.PersistenceException;
 
 import com.fnr.connection.ConnectionFactory;
 import com.fnr.interfaces.IDAO;
-import com.fnr.model.Bicycle;
 
 public class DAO<T> implements IDAO<T> {
 
@@ -53,7 +52,7 @@ public class DAO<T> implements IDAO<T> {
 			return true;
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+			System.out.println("Desfazendo transaï¿½ï¿½es... \nMotivo: " + e.getMessage());
 			return false;
 		} finally {
 			em.close();
@@ -70,7 +69,7 @@ public class DAO<T> implements IDAO<T> {
 			return true;
 		} catch (PersistenceException e) {
 			em.getTransaction().rollback();
-			System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+			System.out.println("Desfazendo transaï¿½ï¿½es... \nMotivo: " + e.getMessage());
 			return false;
 		} finally {
 			em.close();

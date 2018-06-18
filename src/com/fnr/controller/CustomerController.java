@@ -33,15 +33,15 @@ public class CustomerController implements IController<Customer>{
 	}
 
 	@Override
-	public Response put(ConnectionFactory conn, Customer cust) {
-		if (verifyData(cust) && this.dao.put(conn, cust)) 
+	public Response put(ConnectionFactory conn, Customer customer) {
+		if (verifyData(customer) && this.dao.put(conn, customer)) 
 			return Response.UPDATE_SUCCESS;
 		return Response.UPDATE_FAILED;
 	}
 
 	@Override
-	public Response delete(ConnectionFactory conn, Integer id) {
-		if (id != null && this.dao.delete(conn, id)) 
+	public Response delete(ConnectionFactory conn, Customer customer, Integer customerId) {
+		if (customerId != null && this.dao.delete(conn, customer, customerId)) 
 			return Response.DELETE_SUCCESS;
 		return Response.DELETE_FAILED;
 	}
@@ -53,7 +53,7 @@ public class CustomerController implements IController<Customer>{
 			try {
 				return em.find(Customer.class, id);
 			} catch (PersistenceException e) {
-				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+				System.out.println("Desfazendo transaï¿½ï¿½es... \nMotivo: " + e.getMessage());
 				return null;
 			} finally {
 				em.close();

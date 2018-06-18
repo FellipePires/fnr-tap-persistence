@@ -41,8 +41,8 @@ public class AddressesController implements IController<Addresses> {
 	}
 
 	@Override
-	public Response delete(ConnectionFactory conn, Integer id) {
-		if (id != null && this.dao.delete(conn, id))
+	public Response delete(ConnectionFactory conn, Addresses address, Integer addressId) {
+		if (addressId != null && this.dao.delete(conn, address, addressId))
 			return Response.DELETE_SUCCESS;
 		return Response.DELETE_FAILED;
 	}
@@ -54,7 +54,7 @@ public class AddressesController implements IController<Addresses> {
 			try {
 				return em.find(Addresses.class, id);
 			} catch (PersistenceException e) {
-				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+				System.out.println("Desfazendo transaï¿½ï¿½es... \nMotivo: " + e.getMessage());
 				return null;
 			} finally {
 				em.close();

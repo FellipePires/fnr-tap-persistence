@@ -40,8 +40,8 @@ public class AttendController implements IController<Attend>{
 	}
 
 	@Override
-	public Response delete(ConnectionFactory conn, Integer id) {
-		if (id != null && this.dao.delete(conn, id)) 
+	public Response delete(ConnectionFactory conn, Attend att, Integer attendId) {
+		if (attendId != null && this.dao.delete(conn, att, attendId)) 
 			return Response.DELETE_SUCCESS;
 		return Response.DELETE_FAILED;
 	}
@@ -53,7 +53,7 @@ public class AttendController implements IController<Attend>{
 			try {
 				return em.find(Attend.class, id);
 			} catch (PersistenceException e) {
-				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
+				System.out.println("Desfazendo transaï¿½ï¿½es... \nMotivo: " + e.getMessage());
 				return null;
 			} finally {
 				em.close();
