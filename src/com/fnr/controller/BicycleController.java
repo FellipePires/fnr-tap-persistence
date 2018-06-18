@@ -1,6 +1,5 @@
 package com.fnr.controller;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
 import javax.persistence.EntityManager;
@@ -8,10 +7,10 @@ import javax.persistence.PersistenceException;
 
 import com.fnr.connection.ConnectionFactory;
 import com.fnr.dao.DAO;
+import com.fnr.enums.Response;
 import com.fnr.interfaces.IController;
 import com.fnr.interfaces.IDAO;
 import com.fnr.model.Bicycle;
-import com.fnr.utils.Response;
 
 public class BicycleController implements IController<Bicycle>{
 	private IDAO<Bicycle> dao;
@@ -20,7 +19,7 @@ public class BicycleController implements IController<Bicycle>{
 		this.dao = new DAO<Bicycle>();
 	}
 
-	public boolean verifyData(Bicycle bike) {
+	private boolean verifyData(Bicycle bike) {
 		if (bike.getBicycleStatus() != null && bike.getBrand() != null && bike.getColor() != null && bike.getModel() != null)
 			return true;
 
@@ -30,56 +29,25 @@ public class BicycleController implements IController<Bicycle>{
 	@Override
 	public Response post(ConnectionFactory conn, Bicycle bike) {
 		if (verifyData(bike) && this.dao.post(conn, bike))
-			return new Response(true, "Cadastro realizado com sucesso");
+			return Response.POST_SUCCESS;
 
-		return new Response(false, "Cadastro não realizado");
+		return Response.POST_FAILED;
 	}
 
 	@Override
-	public boolean put(ConnectionFactory conn, Bicycle bike, Integer id) {
-		if (verifyData(bike)) {
-			EntityManager em = conn.getConnection();
-			try {
-				em.getTransaction().begin();
-
-				bike.setDateTimeUpdate(LocalDateTime.now());
-				bike.setDateTimeUpdateUserId(conn.getUser().getUserId());
-
-				em.merge(bike);
-				em.getTransaction().commit();
-				return true;
-			} catch (PersistenceException e) {
-				em.getTransaction().rollback();
-				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
-				return false;
-			} finally {
-				em.close();
-			}
-		}
-
-		return false;
+	public Response put(ConnectionFactory conn, Bicycle bike) {
+		if (verifyData(bike) && this.dao.put(conn, bike)) 
+			return Response.UPDATE_SUCCESS;
+			
+		return Response.UPDATE_FAILED;
 	}
 
 	@Override
-	public boolean delete(ConnectionFactory conn, Integer id) {
-		if (id != null) {
-			EntityManager em = conn.getConnection();
-			try {
-				em.getTransaction().begin();
-				Bicycle bike = em.find(Bicycle.class, id);
-				em.remove(bike);
-				em.getTransaction().commit();
-				return true;
-			} catch (PersistenceException e) {
-				em.getTransaction().rollback();
-				System.out.println("Desfazendo transações... \nMotivo: " + e.getMessage());
-				return false;
-			} finally {
-				em.close();
-			}
-		}
+	public Response delete(ConnectionFactory conn, Integer id) {
+		if (id != null && this.dao.delete(conn, id)) 
+			return Response.DELETE_SUCCESS;
 
-		return false;
+		return Response.DELETE_FAILED;
 	}
 
 	@Override
@@ -100,8 +68,8 @@ public class BicycleController implements IController<Bicycle>{
 	}
 
 	@Override
-	public List<Bicycle> getAll(ConnectionFactory conn, Bicycle bike) {
-		return this.dao.getAll(conn, bike);
+	public List<Bicycle> getAll(ConnectionFactory conn, Bicycle bicycleInstance) {
+		return this.dao.getAll(conn, bicycleInstance);
 	}
 
 }

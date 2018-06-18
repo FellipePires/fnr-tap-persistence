@@ -8,6 +8,7 @@ public class BikeStoreDemo {
 
 	public static void main(String[] args) {
 
+		
 		try {
 				
 			ConnectionFactory conn = ShowLogin.showLoginView();
@@ -22,7 +23,7 @@ public class BikeStoreDemo {
 							+ "\n2 - Atendimentos"
 							+ "\n3 - Clientes"
 							+ "\n4 - Usuários"
-							+ "\n0 - Logout"));
+							+ "\n\n0 - Logout"));
 					
 					switch(menuOption) {
 					case 1:
@@ -72,19 +73,19 @@ public class BikeStoreDemo {
 //			}
 
 			// Início função atualizar (OK)
-			// BicycleStatus bikeStatus = bikeStatusController.getById(4);
-			//
-			// Bicycle bike = bikeController.getById(3);
-			// bike.setBicycleStatus(bikeStatus);
-			// bike.setBrand("Cannondale");
-			// bike.setColor("Vermelho");
-			// bike.setModel("F21");
-			//
-			// System.out.println(bikeController.put(bike, 3));
+//			 BicycleStatus bikeStatus = bikeStatusController.getById(4);
+//			
+//			 Bicycle bike = bikeController.getById(3);
+//			 bike.setBicycleStatus(bikeStatus);
+//			 bike.setBrand("Cannondale");
+//			 bike.setColor("Vermelho");
+//			 bike.setModel("F21");
+//			
+//			 System.out.println(bikeController.put(bike, 3));
 
 			// Início função remover (OK)
 			// System.out.println(bikeController.delete(3));
-
+//
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {

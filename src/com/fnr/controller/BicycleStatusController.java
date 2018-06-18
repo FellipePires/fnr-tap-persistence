@@ -7,10 +7,10 @@ import javax.persistence.PersistenceException;
 
 import com.fnr.connection.ConnectionFactory;
 import com.fnr.dao.DAO;
+import com.fnr.enums.Response;
 import com.fnr.interfaces.IController;
 import com.fnr.interfaces.IDAO;
 import com.fnr.model.BicycleStatus;
-import com.fnr.utils.Response;
 
 public class BicycleStatusController implements IController<BicycleStatus> {
 	private IDAO<BicycleStatus> dao;
@@ -19,7 +19,6 @@ public class BicycleStatusController implements IController<BicycleStatus> {
 		this.dao = new DAO<BicycleStatus>();
 	}
 
-	@Override
 	public boolean verifyData(BicycleStatus bikeStatus) {
 		if (bikeStatus.getBicycleStatus() != null && bikeStatus.getDescription() != null)
 			return true;
@@ -30,21 +29,21 @@ public class BicycleStatusController implements IController<BicycleStatus> {
 	@Override
 	public Response post(ConnectionFactory conn, BicycleStatus bikeStatus) {
 		if (verifyData(bikeStatus) && this.dao.post(conn, bikeStatus))
-			return new Response(true, "");
+			return Response.POST_SUCCESS;
 
-		return new Response(false, "");
+		return  Response.POST_FAILED;
 	}
 
 	@Override
-	public boolean put(ConnectionFactory conn, BicycleStatus entity, Integer id) {
+	public Response put(ConnectionFactory conn, BicycleStatus entity) {
 
-		return false;
+		return null;
 	}
 
 	@Override
-	public boolean delete(ConnectionFactory conn, Integer id) {
+	public Response delete(ConnectionFactory conn, Integer id) {
 		// TODO Auto-generated method stub
-		return false;
+		return null;
 	}
 
 	@Override
