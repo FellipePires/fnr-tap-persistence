@@ -11,6 +11,7 @@ import com.fnr.dao.DAO;
 import com.fnr.interfaces.IController;
 import com.fnr.interfaces.IDAO;
 import com.fnr.model.Bicycle;
+import com.fnr.utils.Response;
 
 public class BicycleController implements IController<Bicycle>{
 	private IDAO<Bicycle> dao;
@@ -27,22 +28,22 @@ public class BicycleController implements IController<Bicycle>{
 	}
 
 	@Override
-	public boolean post(Bicycle bike) {
-		if (verifyData(bike) && this.dao.post(bike))
-			return true;
+	public Response post(ConnectionFactory conn, Bicycle bike) {
+		if (verifyData(bike) && this.dao.post(conn, bike))
+			return new Response(true, "Cadastro realizado com sucesso");
 
-		return false;
+		return new Response(false, "Cadastro não realizado");
 	}
 
 	@Override
-	public boolean put(Bicycle bike, Integer id) {
+	public boolean put(ConnectionFactory conn, Bicycle bike, Integer id) {
 		if (verifyData(bike)) {
-			EntityManager em = new ConnectionFactory().getConnection();
+			EntityManager em = conn.getConnection();
 			try {
 				em.getTransaction().begin();
 
 				bike.setDateTimeUpdate(LocalDateTime.now());
-				bike.setDateTimeUpdateUserId(1);
+				bike.setDateTimeUpdateUserId(conn.getUser().getUserId());
 
 				em.merge(bike);
 				em.getTransaction().commit();
@@ -60,9 +61,9 @@ public class BicycleController implements IController<Bicycle>{
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(ConnectionFactory conn, Integer id) {
 		if (id != null) {
-			EntityManager em = new ConnectionFactory().getConnection();
+			EntityManager em = conn.getConnection();
 			try {
 				em.getTransaction().begin();
 				Bicycle bike = em.find(Bicycle.class, id);
@@ -82,9 +83,9 @@ public class BicycleController implements IController<Bicycle>{
 	}
 
 	@Override
-	public Bicycle getById(Integer id) {
+	public Bicycle getById(ConnectionFactory conn, Integer id) {
 		if (id != null) {
-			EntityManager em = new ConnectionFactory().getConnection();
+			EntityManager em = conn.getConnection();
 			try {
 				return em.find(Bicycle.class, id);
 			} catch (PersistenceException e) {
@@ -99,8 +100,8 @@ public class BicycleController implements IController<Bicycle>{
 	}
 
 	@Override
-	public List<Bicycle> getAll(Bicycle bike) {
-		return this.dao.getAll(bike);
+	public List<Bicycle> getAll(ConnectionFactory conn, Bicycle bike) {
+		return this.dao.getAll(conn, bike);
 	}
 
 }

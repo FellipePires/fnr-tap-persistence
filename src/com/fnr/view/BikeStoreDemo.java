@@ -1,35 +1,75 @@
 package com.fnr.view;
 
-import java.time.LocalDateTime;
-import java.util.List;
+import javax.swing.JOptionPane;
 
 import com.fnr.connection.ConnectionFactory;
-import com.fnr.controller.BicycleController;
-import com.fnr.controller.BicycleStatusController;
-import com.fnr.interfaces.IController;
-import com.fnr.model.Bicycle;
-import com.fnr.model.BicycleStatus;
 
 public class BikeStoreDemo {
 
 	public static void main(String[] args) {
 
-		System.out.println(BikeStoreDemo.class.getSimpleName());
-		
 		try {
-			BicycleStatus bikeStatusPronta = new BicycleStatus("BD", "Bike despachada");
-			bikeStatusPronta.setDateTimeCreation(LocalDateTime.now());
-			bikeStatusPronta.setDateTimeCreationUserId(1);
-
-			IController<BicycleStatus> bikeStatusController = new BicycleStatusController();
-			IController<Bicycle> bikeController = new BicycleController();
-
-			bikeStatusController.post(bikeStatusPronta);// Inserir Bike Status (OK)
-			
-			List<BicycleStatus> b1 = bikeStatusController.getAll(new BicycleStatus()); // Listar todos os dados da tabela (OK)
-			for (BicycleStatus b : b1) {
-				System.out.println(b.getDescription());
+				
+			ConnectionFactory conn = ShowLogin.showLoginView();
+			if(conn != null) {
+				
+				int menuOption = 0;
+				do {
+					
+					menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Cargo: "+conn.getUserPu() 
+					+"\n\nDigite uma opção:"
+							+ "\n1 - Bicicletas"
+							+ "\n2 - Atendimentos"
+							+ "\n3 - Clientes"
+							+ "\n4 - Usuários"
+							+ "\n0 - Logout"));
+					
+					switch(menuOption) {
+					case 1:
+						ShowBicycles.showBicyclesView(conn);
+						break;
+						
+					case 2:
+						break;
+						
+					case 3:
+						break;
+						
+					case 4:
+						break;
+						
+					case 0:
+						ShowLogin.showLoginView();
+						break;
+						
+//					default: 
+					}
+					
+					
+					
+				}while(menuOption != 0);
+			}else {
+				System.out.println("User inválido");
 			}
+			
+			
+			
+			
+			
+			
+//			BicycleStatus bikeStatusPronta = new BicycleStatus("BD", "Bike despachada");
+//			bikeStatusPronta.setDateTimeCreation(LocalDateTime.now());
+//			bikeStatusPronta.setDateTimeCreationUserId(1);
+//
+//			IController<BicycleStatus> bikeStatusController = new BicycleStatusController();
+//			IController<Bicycle> bikeController = new BicycleController();
+//
+//			bikeStatusController.post(bikeStatusPronta);// Inserir Bike Status (OK)
+//			
+//			List<BicycleStatus> b1 = bikeStatusController.getAll(new BicycleStatus()); // Listar todos os dados da tabela (OK)
+//			for (BicycleStatus b : b1) {
+//				System.out.println(b.getDescription());
+//			}
 
 			// Início função atualizar (OK)
 			// BicycleStatus bikeStatus = bikeStatusController.getById(4);
@@ -48,7 +88,7 @@ public class BikeStoreDemo {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			ConnectionFactory.getEMFactory().close();
+//			ConnectionFactory.getEMFactory().close();
 		}
 
 	}

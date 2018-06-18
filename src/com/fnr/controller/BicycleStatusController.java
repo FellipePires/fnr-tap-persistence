@@ -10,14 +10,15 @@ import com.fnr.dao.DAO;
 import com.fnr.interfaces.IController;
 import com.fnr.interfaces.IDAO;
 import com.fnr.model.BicycleStatus;
+import com.fnr.utils.Response;
 
-public class BicycleStatusController implements IController<BicycleStatus>{
+public class BicycleStatusController implements IController<BicycleStatus> {
 	private IDAO<BicycleStatus> dao;
-	
+
 	public BicycleStatusController() {
 		this.dao = new DAO<BicycleStatus>();
 	}
-	
+
 	@Override
 	public boolean verifyData(BicycleStatus bikeStatus) {
 		if (bikeStatus.getBicycleStatus() != null && bikeStatus.getDescription() != null)
@@ -25,43 +26,44 @@ public class BicycleStatusController implements IController<BicycleStatus>{
 
 		return false;
 	}
-	
+
 	@Override
-	public boolean post(BicycleStatus bikeStatus) {
-		if(verifyData(bikeStatus) && this.dao.post(bikeStatus))
-			return true;
-		
-		return false;
+	public Response post(ConnectionFactory conn, BicycleStatus bikeStatus) {
+		if (verifyData(bikeStatus) && this.dao.post(conn, bikeStatus))
+			return new Response(true, "");
+
+		return new Response(false, "");
 	}
-	
+
 	@Override
-	public boolean put(BicycleStatus entity, Integer id) {
+	public boolean put(ConnectionFactory conn, BicycleStatus entity, Integer id) {
+
 		return false;
 	}
 
 	@Override
-	public boolean delete(Integer id) {
+	public boolean delete(ConnectionFactory conn, Integer id) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public BicycleStatus getById(Integer id) {
-		EntityManager em = new ConnectionFactory().getConnection();
+	public BicycleStatus getById(ConnectionFactory conn, Integer id) {
+		EntityManager em = conn.getConnection();
 		try {
 			return em.find(BicycleStatus.class, id);
-		}catch(PersistenceException e) {
+		} catch (PersistenceException e) {
 			e.printStackTrace();
 			return null;
-		}finally {
+		} finally {
 			em.close();
 		}
 
 	}
 
 	@Override
-	public List<BicycleStatus> getAll(BicycleStatus bikeStatus) {
-		return this.dao.getAll(bikeStatus);
+	public List<BicycleStatus> getAll(ConnectionFactory conn, BicycleStatus bikeStatus) {
+		return this.dao.getAll(conn, bikeStatus);
 	}
 
 }
