@@ -118,7 +118,7 @@ public class ShowUsers {
 			
 			if(users.isEmpty()) {
 				
-				JOptionPane.showMessageDialog(null, "Não há bicicletas cadastradas");
+				JOptionPane.showMessageDialog(null, "Não há usuários cadastrados");
 			}else {
 				
 				for (User u : users) {

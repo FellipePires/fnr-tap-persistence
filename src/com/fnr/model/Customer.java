@@ -42,13 +42,17 @@ public class Customer {
 
 	@Column(name = "residencial_phone", length = 12, nullable = false)
 	private String residencial_phone;
+	
+	@Column(name = "address", length = 250, nullable = false)
+	private String address;
 
 	public Customer() {}
-	public Customer(String name, String email, String phone, String residencial_phone) {
+	public Customer(String name, String email, String phone, String residencial_phone, String address) {
 		this.name = name;
 		this.email = email;
 		this.phone = phone;
 		this.residencial_phone = residencial_phone;
+		this.address = address;
 	}
 
 	public String getName() {
@@ -122,4 +126,14 @@ public class Customer {
 	public void setResidencial_Phone(String residencial_phone) {
 		this.residencial_phone = residencial_phone;
 	}
+	
+	public String getAddress() {
+		return address;
+	}
+	
+	public void setAddress(String address) {
+		this.address = address;
+	}
+	
+	
 }
