@@ -18,11 +18,11 @@ public class BikeStoreDemo {
 				do {
 					
 					menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Cargo: "+conn.getUserPu() 
-					+"\n\nDigite uma op√ß√£o:"
+					+"\n\nDigite uma opÁ„o:"
 							+ "\n1 - Bicicletas"
 							+ "\n2 - Atendimentos"
 							+ "\n3 - Clientes"
-							+ "\n4 - Usu√°rios"
+							+ "\n4 - Usu·rios"
 							+ "\n\n0 - Logout"));
 					
 					switch(menuOption) {
@@ -50,7 +50,7 @@ public class BikeStoreDemo {
 					
 				}while(menuOption != 0);
 			}else {
-				System.out.println("User inv√°lido");
+				System.out.println("User inv·lido");
 			}
 			
 			

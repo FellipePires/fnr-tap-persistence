@@ -85,6 +85,4 @@ public class BicycleStatus {
 	public void setBicycleStatus(String bicycleStatus) {
 		this.bicycleStatus = bicycleStatus;
 	}
-
 }
-

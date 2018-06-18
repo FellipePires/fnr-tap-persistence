@@ -31,7 +31,7 @@ public class Bicycle {
     @Id
     @Column(name = "bicycle_id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer bicycleId; //Primary Key
+	private Integer bicycleId;
     
     @ManyToOne(cascade = CascadeType.MERGE)
     @JoinColumn(name = "bicycle_status_id", foreignKey=@ForeignKey(name="fk_bicycle_status_id_bicycles"))
@@ -108,5 +108,4 @@ public class Bicycle {
 	public void setBicycleStatus(BicycleStatus bicycleStatus) {
 		this.bicycleStatus = bicycleStatus;
 	}
-	
 }

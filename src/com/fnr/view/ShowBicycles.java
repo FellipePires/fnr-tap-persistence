@@ -21,10 +21,10 @@ public class ShowBicycles {
 		
 		int menuOption = 0;
 		do {
-			menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite uma op√ß√£o:"
+			menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite uma opÁ„o:"
 					+ "\n1 - Cadastrar"
 					+ "\n2 - Listar"
-					+ "\n3 - Buscar por c√≥digo"
+					+ "\n3 - Buscar por cÛdigo"
 					+ "\n4 - Atualizar"
 					+ "\n5 - Remover"
 					+ "\n\n0 - Voltar"));
@@ -53,7 +53,7 @@ public class ShowBicycles {
 				case 0:
 					break;
 				
-				default: JOptionPane.showMessageDialog(null, "Informe uma op√ß√£o v√°lida!");
+				default: JOptionPane.showMessageDialog(null, "Informe uma opÁ„o v·lida!");
 			}
 			
 		}while(menuOption != 0);
@@ -66,7 +66,7 @@ public class ShowBicycles {
 			return bicycleController.delete(conn, bicycleId).getMessage();
 			
 		}else {
-			return "Empregado n√£o pode realizar altera√ß√µes no banco";
+			return "Empregado n„o pode realizar alteraÁıes no banco";
 		}
 	}
 	
@@ -91,7 +91,7 @@ public class ShowBicycles {
 			
 			return bicycleController.put(conn, bicycle).getMessage();
 		}else {
-			return "Empregado n√£o pode realizar altera√ß√µes no banco";
+			return "Empregado n„o pode realizar alteraÁıes no banco";
 		}
 		
 	}
@@ -111,7 +111,7 @@ public class ShowBicycles {
 			
 			if(bicycles.isEmpty()) {
 				
-				JOptionPane.showMessageDialog(null, "N√£o h√° bicicletas cadastradas");
+				JOptionPane.showMessageDialog(null, "N„o h· bicicletas cadastradas");
 			}else {
 				
 				for (Bicycle b : bicycles) {
@@ -128,7 +128,7 @@ public class ShowBicycles {
 			
 			List<BicycleStatus> bStatus = bicycleStatusController.getAll(conn, new BicycleStatus()); 
 			for (BicycleStatus b : bStatus) {
-				System.out.println("Status: "+b.getBicycleStatus()+"\tDescri√ß√£o: "+b.getDescription()+"\tID: "+b.getBicycleStatusId());
+				System.out.println("Status: "+b.getBicycleStatus()+"\tDescriÁ„o: "+b.getDescription()+"\tID: "+b.getBicycleStatusId());
 			}
 			
 			int idBicycleStatus = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do Status da bicicleta: "));
@@ -141,7 +141,7 @@ public class ShowBicycles {
 			
 			return bicycleController.post(conn, bicycle).getMessage();
 		}else {
-			return "Empregado n√£o pode realizar altera√ß√µes no banco";
+			return "Empregado n„o pode realizar alteraÁıes no banco";
 		}
 	}
 }

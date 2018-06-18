@@ -104,5 +104,4 @@ public class User {
 	public void setIsAdmin(Boolean isAdmin) {
 		this.isAdmin = isAdmin;
 	}
-    
 }
