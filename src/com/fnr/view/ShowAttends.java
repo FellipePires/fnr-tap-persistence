@@ -70,39 +70,37 @@ public class ShowAttends {
 			return attendController.delete(conn, attend, attendId).getMessage();
 
 		} else {
+			
 			return "Empregado não pode realizar alterações no banco";
 		}
 	}
 
 	private static String update(ConnectionFactory conn) {
 		if (conn.getUser().getIsAdmin()) {
+			System.out.println("------------------------Atendimentos--------------------------------");
+			listAttends(conn);
 			int attendId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do atendimento"));
 			Attend attend = attendController.getById(conn, attendId);
 			
 			Double value = Double.parseDouble(JOptionPane.showInputDialog("Informe o valor do atendimento (R$) \nValor atual: "+attend.getValue()));
 			attend.setValue(value);
 			
-			int bicycleStatusId = Integer.parseInt(JOptionPane.showInputDialog("Informe o Status ID da Bicicleta \n--> Status Atual: " 
+			int bicycleStatusId = Integer.parseInt(JOptionPane.showInputDialog("Informe o Status ID da Bicicleta \n--> ID Status Atual: " 
 			+ attend.getBicycleStatus().getBicycleStatus() + " - " + attend.getBicycleStatus().getBicycleStatusId()));
 			BicycleStatus bicycleStatus = bicycleStatusController.getById(conn, bicycleStatusId);
 			
-			attend.setBicycleStatus(bicycleStatus);
+			int bicycleId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da Bicicleta \n--> ID bicicleta Atual: " + attend.getBicycle().getBicycleId()));
+			Bicycle bicycle = bicycleController.getById(conn, bicycleId);
 			
-//			String name = JOptionPane.showInputDialog("Informe o nome \n-->Nome atual: " + attend.getName());
-//			attend.setName(name);
-//			String email = JOptionPane.showInputDialog("Informe o email \n-->EMail atual: " + attend.getEmail());
-//			attend.setEmail(email);
-//			String password = JOptionPane.showInputDialog("Informe o email \n-->Senha atual: " + attend.getPassword());
-//			attend.setPassword(Utils.encryptPassword(password));
-//			boolean isAdmin = Boolean.parseBoolean(
-//					JOptionPane.showInputDialog("Informe se é Administrador \n-->Cargo atual: " + attend.getIsAdmin()));
-//			attend.setIsAdmin(isAdmin);
-
+			attend.setBicycleStatus(bicycleStatus);
+			attend.setBicycle(bicycle);
+			
 			attend.setDateTimeUpdate(LocalDateTime.now());
 			attend.setDateTimeUpdateUserId(conn.getUser().getUserId());
 
 			return attendController.put(conn, attend).getMessage();
 		} else {
+			
 			return "Empregado não pode realizar alterações no banco";
 		}
 
@@ -168,6 +166,7 @@ public class ShowAttends {
 
 			return attendController.post(conn, attend).getMessage();
 		} else {
+			
 			return "Empregado não pode realizar alterações no banco";
 		}
 	}

@@ -32,15 +32,15 @@ public class Attend {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer attendId; 
     
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "bicycle_id", foreignKey=@ForeignKey(name="fk_bicycle_id_attend"))
     private Bicycle bicycle;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "bicycle_status_id", foreignKey=@ForeignKey(name="fk_bicycle_status_id_attend"))
     private BicycleStatus bicycleStatus;
     
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne(cascade = {CascadeType.REFRESH})
     @JoinColumn(name = "customer_id", foreignKey=@ForeignKey(name="fk_customer_id_attend"))
     private Customer customer;
     	

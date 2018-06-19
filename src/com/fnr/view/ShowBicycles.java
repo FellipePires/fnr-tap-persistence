@@ -84,15 +84,16 @@ public class ShowBicycles {
 			String color = JOptionPane.showInputDialog("Informe a cor \n-->Cor atual: "+bicycle.getColor());
 			bicycle.setColor(color);
 			
-//		BicycleStatus bicycleStatus = bicycle.getBicycleStatus();
-//		int bicycleStatusId = Integer.parseInt(JOptionPane.showInputDialog("Informe o Status ID da Bicicleta \n--> Status Atual: " + bicycleStatus.getBicycleStatus()));
-//		bicycleStatus.setBicycleStatusId(bicycleStatusId);
+			BicycleStatus bicycleStatus = bicycle.getBicycleStatus();
+			int bicycleStatusId = Integer.parseInt(JOptionPane.showInputDialog("Informe o Status ID da Bicicleta \n--> Status Atual: " + bicycleStatus.getBicycleStatus()));
+			bicycleStatus.setBicycleStatusId(bicycleStatusId);
 			
 			bicycle.setDateTimeUpdate(LocalDateTime.now());
 			bicycle.setDateTimeUpdateUserId(conn.getUser().getUserId());	
 			
 			return bicycleController.put(conn, bicycle).getMessage();
 		}else {
+			
 			return "Empregado n�o pode realizar altera��es no banco";
 		}
 		
