@@ -31,7 +31,7 @@ static IController<Customer> customerController = new CustomerController();
 					break;
 					
 				case 2:
-					listUsers(conn);
+					listCustomers(conn);
 					break;
 					
 				case 3:
@@ -56,7 +56,7 @@ static IController<Customer> customerController = new CustomerController();
 		
 	}
 	
-	private static String remove(ConnectionFactory conn) {
+	protected static String remove(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			int customerId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do cliente"));
 			Customer customer = customerController.getById(conn, customerId);
@@ -68,7 +68,7 @@ static IController<Customer> customerController = new CustomerController();
 		}
 	}
 	
-	private static String update(ConnectionFactory conn) {
+	protected static String update(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			int customerId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do cliente"));
 			Customer customer = customerController.getById(conn, customerId);
@@ -94,7 +94,7 @@ static IController<Customer> customerController = new CustomerController();
 		
 	}
 	
-	private static void listById(ConnectionFactory conn) {
+	protected static void listById(ConnectionFactory conn) {
 		if(conn.getUser() != null) {
 			
 			int customerId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do cliente"));
@@ -104,7 +104,7 @@ static IController<Customer> customerController = new CustomerController();
 		}
 	}
 	
-	private static void listUsers(ConnectionFactory conn) {
+	protected static void listCustomers(ConnectionFactory conn) {
 			List<Customer> customers = customerController.getAll(conn, new Customer());
 			
 			if(customers.isEmpty()) {
@@ -118,7 +118,7 @@ static IController<Customer> customerController = new CustomerController();
 			}
 	}
 	
-	private static String postCustomer(ConnectionFactory conn) {
+	protected static String postCustomer(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			String name = JOptionPane.showInputDialog(null, "Informe o nome");
 			String email = JOptionPane.showInputDialog(null, "Informe o email");

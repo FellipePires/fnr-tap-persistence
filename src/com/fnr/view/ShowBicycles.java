@@ -21,10 +21,10 @@ public class ShowBicycles {
 		
 		int menuOption = 0;
 		do {
-			menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite uma opção:"
+			menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Digite uma opï¿½ï¿½o:"
 					+ "\n1 - Cadastrar"
 					+ "\n2 - Listar"
-					+ "\n3 - Buscar por código"
+					+ "\n3 - Buscar por cï¿½digo"
 					+ "\n4 - Atualizar"
 					+ "\n5 - Remover"
 					+ "\n\n0 - Voltar"));
@@ -53,14 +53,14 @@ public class ShowBicycles {
 				case 0:
 					break;
 				
-				default: JOptionPane.showMessageDialog(null, "Informe uma opção válida!");
+				default: JOptionPane.showMessageDialog(null, "Informe uma opï¿½ï¿½o vï¿½lida!");
 			}
 			
 		}while(menuOption != 0);
 		
 	}
 	
-	private static String remove(ConnectionFactory conn) {
+	protected static String remove(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			int bicycleId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da Bicicleta"));
 			Bicycle bicycle = bicycleController.getById(conn, bicycleId);
@@ -68,11 +68,11 @@ public class ShowBicycles {
 			return bicycleController.delete(conn, bicycle, bicycleId).getMessage();
 			
 		}else {
-			return "Empregado não pode realizar alterações no banco";
+			return "Empregado nï¿½o pode realizar alteraï¿½ï¿½es no banco";
 		}
 	}
 	
-	private static String update(ConnectionFactory conn) {
+	protected static String update(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			int bicycleId = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da Bicicleta"));
 			Bicycle bicycle = bicycleController.getById(conn, bicycleId);
@@ -93,12 +93,12 @@ public class ShowBicycles {
 			
 			return bicycleController.put(conn, bicycle).getMessage();
 		}else {
-			return "Empregado não pode realizar alterações no banco";
+			return "Empregado nï¿½o pode realizar alteraï¿½ï¿½es no banco";
 		}
 		
 	}
 	
-	private static void listById(ConnectionFactory conn) {
+	protected static void listById(ConnectionFactory conn) {
 		if(conn.getUser() != null) {
 			
 			int id = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID da Bicicleta"));
@@ -108,12 +108,12 @@ public class ShowBicycles {
 		}
 	}
 	
-	private static void listBicycles(ConnectionFactory conn) {
+	protected static void listBicycles(ConnectionFactory conn) {
 			List<Bicycle> bicycles = bicycleController.getAll(conn, new Bicycle());
 			
 			if(bicycles.isEmpty()) {
 				
-				JOptionPane.showMessageDialog(null, "Não há bicicletas cadastradas");
+				JOptionPane.showMessageDialog(null, "Nï¿½o hï¿½ bicicletas cadastradas");
 			}else {
 				
 				for (Bicycle b : bicycles) {
@@ -122,7 +122,7 @@ public class ShowBicycles {
 			}
 	}
 	
-	private static String postBicycle(ConnectionFactory conn) {
+	protected static String postBicycle(ConnectionFactory conn) {
 		if(conn.getUser().getIsAdmin()) {
 			String brand = JOptionPane.showInputDialog(null, "Informe a marca");
 			String model = JOptionPane.showInputDialog(null, "Informe o modelo");
@@ -130,7 +130,7 @@ public class ShowBicycles {
 			
 			List<BicycleStatus> bStatus = bicycleStatusController.getAll(conn, new BicycleStatus()); 
 			for (BicycleStatus b : bStatus) {
-				System.out.println("Status: "+b.getBicycleStatus()+"\tDescrição: "+b.getDescription()+"\tID: "+b.getBicycleStatusId());
+				System.out.println("Status: "+b.getBicycleStatus()+"\tDescriï¿½ï¿½o: "+b.getDescription()+"\tID: "+b.getBicycleStatusId());
 			}
 			
 			int idBicycleStatus = Integer.parseInt(JOptionPane.showInputDialog("Informe o ID do Status da bicicleta: "));
@@ -143,7 +143,7 @@ public class ShowBicycles {
 			
 			return bicycleController.post(conn, bicycle).getMessage();
 		}else {
-			return "Empregado não pode realizar alterações no banco";
+			return "Empregado nï¿½o pode realizar alteraï¿½ï¿½es no banco";
 		}
 	}
 }

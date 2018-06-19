@@ -8,9 +8,9 @@ public class BikeStoreDemo {
 
 	public static void main(String[] args) {
 
+		ConnectionFactory conn = null; 
 		try {
-				
-			ConnectionFactory conn = ShowLogin.showLoginView();
+			conn = ShowLogin.showLoginView();
 			if(conn != null) {
 				
 				int menuOption = 0;
@@ -30,7 +30,7 @@ public class BikeStoreDemo {
 							break;
 							
 						case 2:
-	//						ShowBicycles.showBicyclesView(conn);
+							ShowAttends.showAttendsView(conn);
 							break;
 							
 						case 3:
@@ -57,7 +57,7 @@ public class BikeStoreDemo {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-//			ConnectionFactory.getEMFactory().close();
+			conn.getEMFactory().close();
 		}
 
 	}

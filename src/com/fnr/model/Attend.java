@@ -45,7 +45,7 @@ public class Attend {
     private Customer customer;
     	
 	@Column(name = "value", length = 40, nullable = false)
-    private double value;
+    private Double value;
 
     public Attend() {}
     public Attend(Bicycle bicycle, BicycleStatus bicycleStatus, Customer customer, Double value) {

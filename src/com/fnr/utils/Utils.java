@@ -18,7 +18,9 @@ public class Utils {
 		EntityManager em = conn.getConnection();
 
 		try {
-			Query sql = em.createQuery("from User where email = :email and password = :password").setParameter("email", LoginInfo.email).setParameter("password", LoginInfo.password);
+			Query sql = em.createQuery("from User where email = :email and password = :password")
+					.setParameter("email", LoginInfo.email)
+					.setParameter("password", LoginInfo.password);
 
 			User user = (User) sql.getSingleResult();
 
