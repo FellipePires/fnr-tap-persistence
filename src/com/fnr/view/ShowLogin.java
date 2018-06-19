@@ -1,6 +1,9 @@
 package com.fnr.view;
 
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
 
 import com.fnr.connection.ConnectionFactory;
 import com.fnr.model.User;
@@ -11,14 +14,31 @@ public class ShowLogin {
 	
 	public static ConnectionFactory showLoginView() {
 		try {
-			// LOGIN DO USUÃ�RIO
 			User user = null;
 			
 			do {
 				String email = JOptionPane.showInputDialog(null, "Email:");
-				String password = JOptionPane.showInputDialog(null, "Senha:");
+				
+				JPanel panel = new JPanel();
+				JLabel label = new JLabel("Informe a senha");
+				JPasswordField pass = new JPasswordField(10);
+				
+				panel.add(label);
+				panel.add(pass);
+				
+				panel.setSize(600, 450);
+				
+				String[] options = new String[]{"OK", "Cancelar"};
+				int option = JOptionPane.showOptionDialog(null, panel, "Login",
+				                         JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
+				                         null, options, options[0]);
+				
+				char[] password = null;
+				if(option == 0) {
+				    password = pass.getPassword();
+				}
 
-				LoginInfo login = new LoginInfo(email, Utils.encryptPassword(password));
+				LoginInfo login = new LoginInfo(email, Utils.encryptPassword(new String(password)));
 
 				user = Utils.authUser(login);
 
