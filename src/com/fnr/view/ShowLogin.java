@@ -26,8 +26,6 @@ public class ShowLogin {
 				panel.add(label);
 				panel.add(pass);
 				
-				panel.setSize(600, 450);
-				
 				String[] options = new String[]{"OK", "Cancelar"};
 				int option = JOptionPane.showOptionDialog(null, panel, "Login",
 				                         JOptionPane.NO_OPTION, JOptionPane.PLAIN_MESSAGE,
@@ -45,8 +43,10 @@ public class ShowLogin {
 				if (user == null) {
 					JOptionPane.showMessageDialog(null, "Usuário não encontrado... Tente novamente");
 				} 
-			} while (user == null);		
+			} while (user == null);
+			
 			return new ConnectionFactory(user);
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

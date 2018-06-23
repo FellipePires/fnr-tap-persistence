@@ -7,22 +7,23 @@ import com.fnr.connection.ConnectionFactory;
 public class BikeStoreDemo {
 
 	public static void main(String[] args) {
-
+		
 		ConnectionFactory conn = null; 
 		try {
 			conn = ShowLogin.showLoginView();
-			if(conn != null) {
+
+			if(conn.getUser() != null) {
 				
-				int menuOption = 0;
+				int menuOption;
 				do {
-					
 					menuOption = Integer.parseInt(JOptionPane.showInputDialog(null, "Cargo: "+conn.getUserPu() 
-					+"\n\nDigite uma op��o:"
+					+"\n\nDigite uma opção:"
 							+ "\n1 - Bicicletas"
 							+ "\n2 - Atendimentos"
 							+ "\n3 - Clientes"
-							+ "\n4 - Usu�rios"
-							+ "\n\n0 - Logout"));
+							+ "\n4 - Usuários"
+							+ "\n0 - Logout"
+							+ "\n\n-1 - SAIR"));
 					
 					switch(menuOption) {
 						case 1:
@@ -43,13 +44,18 @@ public class BikeStoreDemo {
 							
 						case 0:
 							conn.getEMFactory().close();
-							ShowLogin.showLoginView();
+							conn = ShowLogin.showLoginView();
+							break;
+							
+						case -1:
+							conn.getEMFactory().close();
 							break;
 							
 						default: JOptionPane.showMessageDialog(null, "Informe um valor válido!");
 					}
 					
-				}while(menuOption != 0);
+				}while(menuOption != -1);
+				
 			}else {
 				System.out.println("User inv�lido");
 			}
